@@ -3,8 +3,11 @@ import React from "react";
 const UserList = (props) => {
   return (
     <ul>
-      <li></li>
-      <li></li>
+      {props.users.map((user) => (
+        <li key={user.id}>
+          {user.name} ({user.age} years old)
+        </li>
+      ))}
     </ul>
   );
 };

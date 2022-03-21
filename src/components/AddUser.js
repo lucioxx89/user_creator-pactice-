@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddUser() {
+function AddUser(props) {
   const [entredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
   // const [enteredList, setEnteredList] = useState([]);
@@ -20,7 +20,7 @@ function AddUser() {
     if (+enteredAge < 1) {
       return;
     }
-    console.log(entredUsername, enteredAge);
+    props.onAddUser(entredUsername, enteredAge);
     // setEnteredList(...enteredList, setEnteredList);
     setEnteredUsername("");
     setEnteredAge("");
@@ -40,7 +40,7 @@ function AddUser() {
           />
         </div>
         <div>
-          <label htmlFor="age">Age (Years)</label>
+          <label htmlFor="age">Age</label>
           <input
             onChange={ageChangeHandler}
             type="number"

@@ -1,37 +1,51 @@
 import React, { useState } from "react";
 
 function AddUser() {
-  const [username, setUsername] = useState("");
+  const [entredUsername, setEnteredUsername] = useState("");
+  const [enteredAge, setEnteredAge] = useState("");
+  // const [enteredList, setEnteredList] = useState([]);
 
   const usernameChangeHandler = (event) => {
-    console.log(event.target.value);
-    setUsername(event.target.value);
+    setEnteredUsername(event.target.value);
   };
   const ageChangeHandler = (event) => {
-    console.log(event.target.value);
+    setEnteredAge(event.target.value);
   };
 
   const FormSubmitHandler = (event) => {
     event.preventDefault();
-    setUsername("");
+    if (entredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+    if (+enteredAge < 1) {
+      return;
+    }
+    console.log(entredUsername, enteredAge);
+    // setEnteredList(...enteredList, setEnteredList);
+    setEnteredUsername("");
+    setEnteredAge("");
   };
+
   return (
     <div>
       <form onSubmit={FormSubmitHandler}>
         <div>
-          <label>Username</label>
+          <label htmlFor="username">Username</label>
           <input
             onChange={usernameChangeHandler}
             type="text"
-            value={username} //2 ways binding
+            id="username"
+            value={entredUsername} //2 ways binding
             placeholder="Write your username"
           />
         </div>
         <div>
-          <label>Age(Years)</label>
+          <label htmlFor="age">Age (Years)</label>
           <input
             onChange={ageChangeHandler}
             type="number"
+            id="age"
+            value={enteredAge} //2 ways binding
             placeholder="Write your age"
           />
         </div>
@@ -41,7 +55,11 @@ function AddUser() {
       </form>
 
       <div>
-        <p>{username}</p>
+        {/* <ul>
+          {enteredList.map((item) => {
+            return <li>{item.age}</li>;
+          })}
+        </ul> */}
       </div>
     </div>
   );
